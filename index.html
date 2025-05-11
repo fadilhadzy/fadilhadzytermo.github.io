@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Ringkasan Lengkap Termodinamika</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background-color: #eef2f3;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 30px;
+      text-align: center;
+      border-bottom: 4px solid #21afde;
+    }
+    nav {
+      background: #0099cc;
+      padding: 15px;
+      text-align: center;
+    }
+    nav a {
+      color: white;
+      margin: 0 10px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      max-width: 960px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      color: #003366;
+      border-bottom: 2px solid #0099cc;
+      padding-bottom: 6px;
+    }
+    p, li {
+      text-align: justify;
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    ul, ol {
+      margin-left: 20px;
+    }
+    img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin: 10px 0;
+    }
+    iframe {
+      width: 100%;
+      height: 360px;
+      border: none;
+      margin: 20px 0;
+    }
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+      margin-top: 40px;
+    }
+  </style>
+
+    <style>
+    /* Accordion Styles */
+    .accordion {
+      background-color: #0077b6;
+      color: white;
+      cursor: pointer;
+      padding: 15px;
+      width: 100%;
+      text-align: left;
+      border: none;
+      outline: none;
+      transition: 0.3s;
+      font-size: 18px;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+    .active, .accordion:hover {
+      background-color: #023e8a;
+    }
+    .panel {
+      padding: 0 15px;
+      display: none;
+      background-color: white;
+      overflow: hidden;
+      border-left: 4px solid #0096c7;
+      border-radius: 0 0 10px 10px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    #topBtn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      z-index: 99;
+      font-size: 18px;
+      background-color: #0096c7;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #topBtn:hover {
+      background-color: #0077b6;
+    }
+    </style>
+    
+</head>
+<body>
+
+    <div id="floating-toc" style="position: fixed; top: 150px; right: 20px; background-color: #fff; border: 2px solid #0096c7; padding: 10px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); z-index: 1000; cursor: move;">
+      <strong>📚 Navigasi Bab:</strong>
+      <ul style="list-style: none; padding-left: 0;">
+      <li><a href="#pengantar">Pengantar</a></li>
+      <li><a href="#bab1">Bab 1</a></li>
+      <li><a href="#bab2">Bab 2</a></li>
+      <li><a href="#bab3">Bab 3</a></li>
+      <li><a href="#bab4">Bab 4</a></li>
+      <li><a href="#bab5">Bab 5</a></li>
+      <li><a href="#bab6">Bab 6</a></li>
+      <li><a href="#soal">Soal Latihan</a></li>
+      </ul>
+    </div>
+
+    <script>
+      // Make the floating TOC draggable
+      const toc = document.getElementById("floating-toc");
+      let isDragging = false;
+      let offsetX, offsetY;
+
+      toc.addEventListener("mousedown", (e) => {
+      isDragging = true;
+      offsetX = e.clientX - toc.getBoundingClientRect().left;
+      offsetY = e.clientY - toc.getBoundingClientRect().top;
+      toc.style.transition = "none"; // Disable smooth transition while dragging
+      });
+
+      document.addEventListener("mousemove", (e) => {
+      if (isDragging) {
+        toc.style.left = `${e.clientX - offsetX}px`;
+        toc.style.top = `${e.clientY - offsetY}px`;
+      }
+      });
+
+      document.addEventListener("mouseup", () => {
+      isDragging = false;
+      toc.style.transition = ""; // Re-enable smooth transition
+      });
+    </script>
+    
+
+<header>
+  <h1 style="font-family: 'Georgia', serif; font-size: 40px; color: #0099cc; text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3); text-transform: uppercase; margin-bottom: 20px; letter-spacing: 2px; line-height: 1.4;">
+    Termodinamika <span style="color: #ffcc00; font-style: italic;">
+      Prof. Dr. Ir. Daniel Saputra, M.S.A.Eng</span>
+  </h1>
+  <h2 style="font-size: 28px; color: #ffffff; margin-bottom: 5px;">Teknik Pertanian 2024</h2>
+  <h2 style="font-size: 24px; color: #ffcc00; margin-bottom: 15px;">Ringkasan Termodinamika</h2>
+  <p style="font-size: 18px; font-style: italic; color: #f8f8f9; margin-bottom: 20px;">
+    <strong>Prof. Dr. Ir. Daniel Saputra, M.S.A.Eng</strong> &mdash; <span style="color: #0099cc;">Semester Genap 2 (2025)</span>
+  </p>
+<p style="margin-top: 15px; font-size: 16px; font-family: 'Monotype Corsiva', cursive; color: #f5f4fc;">
+    <p style="margin-top: 15px; font-size: 18px; font-family: 'Georgia', serif; color: #f5f4fc;">
+        Fadil Hadzy  </strong> (Developer & Enhusiast)</p> 
+    <li>Anggota 
+    <li><strong>Fadil Hadzy 05021282429031</strong> </li>
+    <li><strong>Fahrur Rozi 05021282429061 </strong></li>
+<p style="margin-top: 15px; font-size: 16px; font-family: 'Monotype Corsiva', cursive; color: #e9e8f3;">
+     Semester Genap 2025
+</p>
+</header>
+
+<nav>
+  <a href="#pengantar">Pengantar</a>
+  <a href="#bab1">Bab 1</a>
+  <a href="#bab2">Bab 2</a>
+  <a href="#bab3">Bab 3</a>
+  <a href="#bab4">Bab 4</a>
+  <a href="#bab5">Bab 5</a>
+  <a href="#bab6">Bab 6</a>
+  <a href="#soal">Soal Latihan</a>
+</nav>
+
+<div class="container">
+
+    <div style="text-align: center; margin-bottom: 30px;">
+      <input type="text" id="searchInput" placeholder="🔍 Cari kata kunci di materi..." 
+             style="padding: 10px; width: 60%; font-size: 16px; border-radius: 5px; border: 1px solid #ccc;">
+    </div>
+    
+  <h2 id="pengantar">Pengantar: Pendekatan OBE & Konsep Dasar</h2>
+  <p>Dalam sistem OBE (Outcome-Based Education), fokus bukan pada materi yang diajarkan, melainkan pada kompetensi yang dihasilkan. Mahasiswa dituntut aktif dan jujur, serta mampu menerapkan ilmu dalam kehidupan nyata.</p>
+  <iframe src="https://www.youtube.com/embed/RcBtfppnjeg?si=g0K1XaFi8i95AGJz" title="Video Pengantar OBE"></iframe>
+  <p>Termodinamika sendiri adalah ilmu yang mempelajari energi dan perubahannya, dengan sistem terbuka, tertutup, dan terisolasi.</p>
+  <p>Termodinamika sendiri adalah ilmu yang mempelajari energi dan perubahannya, dengan sistem terbuka, tertutup, dan terisolasi.</p>
+<p>Selain itu, Prof. Daniel juga menyoroti nilai-nilai penting dalam proses pendidikan, yaitu Belonging, Believe, and Behave. Mahasiswa harus merasa menjadi bagian dari komunitas akademik (belonging), memiliki keyakinan untuk bertindak dengan integritas (believe), serta berperilaku sesuai dengan nilai-nilai yang diajarkan (behave). Sikap tidak jujur selama perkuliahan, seperti menyontek, dapat berlanjut ke dunia kerja dan berpotensi menyebabkan tindakan kriminal, seperti korupsi. Oleh karena itu, proses belajar yang jujur dan penuh usaha lebih ditekankan dibandingkan hanya mengejar nilai akhir. Jika mahasiswa belum mencapai standar kompetensi yang ditetapkan, mereka diberikan kesempatan untuk mengikuti remedial hingga memenuhi target pembelajaran.</p>
+<p>Secara keseluruhan, video ini menegaskan bahwa peralihan dari pembelajaran berbasis materi ke pembelajaran berbasis kompetensi merupakan langkah penting dalam meningkatkan kualitas pendidikan. Dengan pendekatan ini, mahasiswa tidak hanya memahami teori tetapi juga mampu menerapkannya.</p>
+<p><strong>Introduksi dan Konsep Dasar Termodinamika</strong></p>
+<ol>
+    <li><strong>Pengertian Termodinamika</strong>
+        <p>Termodinamika adalah cabang ilmu fisika yang mempelajari energi dan perpindahannya dalam bentuk panas dan kerja dalam suatu sistem. Ilmu ini sangat penting dalam berbagai bidang seperti teknik mesin, teknik kimia, teknik listrik, dan bahkan dalam pemahaman fenomena alam seperti perubahan cuaca dan metabolisme dalam tubuh manusia.</p>
+        <p><strong>Contoh dalam kehidupan sehari-hari:</strong></p>
+        <ul>
+            <li>Pemanasan air dalam panci di atas kompor (perpindahan panas).</li>
+            <li>Mesin mobil yang mengubah bahan bakar menjadi energi gerak (konversi energi).</li>
+            <li>Pendingin udara yang menyerap panas dari dalam ruangan dan membuangnya ke luar (prinsip termodinamika diterapkan dalam sistem pendinginan).</li>
+        </ul>
+    </li>
+    <li><strong>Sistem dan Lingkungan dalam Termodinamika</strong>
+        <p>Dalam termodinamika, sistem adalah bagian dari alam semesta yang kita amati, sementara lingkungan adalah segala sesuatu di luar sistem yang dapat mempengaruhinya.</p>
+        <p><strong>Jenis-jenis sistem termodinamika:</strong></p>
+        <ul>
+            <li><strong>Sistem Terbuka:</strong> Dapat bertukar energi dan materi dengan lingkungan.
+                <ul>
+                    <li>Contoh: Panci terbuka yang berisi air yang dipanaskan di atas kompor. Panas berpindah ke air, dan uap air keluar dari panci.</li>
+                </ul>
+            </li>
+            <li><strong>Sistem Tertutup:</strong> Dapat bertukar energi tetapi tidak dapat bertukar materi dengan lingkungan.
+                <ul>
+                    <li>Contoh: Kaleng minuman soda yang tertutup, yang dapat menerima panas dari lingkungan tetapi tidak kehilangan atau menambah massa.</li>
+                </ul>
+            </li>
+            <li><strong>Sistem Terisolasi:</strong> Tidak bertukar energi maupun materi dengan lingkungan.
+                <ul>
+                    <li>Contoh: Termos yang sangat baik isolasinya, yang dapat menjaga suhu minuman panas atau dingin dalam waktu lama.</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li><strong>Besaran-Besaran dalam Termodinamika</strong>
+        <ul>
+            <li><strong>Energi Dalam (U):</strong> Energi total yang dimiliki oleh suatu sistem, yang terdiri dari energi kinetik dan energi potensial dari partikel dalam sistem.</li>
+            <li><strong>Kerja (W):</strong> Energi yang ditransfer dari atau ke sistem akibat gaya yang bekerja.</li>
+            <li><strong>Panas (Q):</strong> Energi yang berpindah akibat perbedaan suhu antara sistem dan lingkungan.</li>
+            <li><strong>Suhu (T):</strong> Ukuran tingkat panas atau dingin suatu benda.</li>
+            <li><strong>Entropi (S):</strong> Ukuran ketidakteraturan atau keacakan dalam sistem.</li>
+        </ul>
+    </li>
+    <li><strong>Hukum-Hukum Termodinamika</strong>
+        <ul>
+            <li><strong>Hukum Nol:</strong> Jika dua sistem masing-masing dalam keseimbangan termal dengan sistem ketiga, maka kedua sistem tersebut juga dalam keseimbangan termal satu sama lain.</li>
+            <li><strong>Hukum Pertama:</strong> Energi tidak dapat diciptakan atau dimusnahkan, hanya dapat diubah dari satu bentuk ke bentuk lain.</li>
+            <li><strong>Hukum Kedua:</strong> Dalam setiap proses alami, entropi suatu sistem selalu bertambah atau tetap.</li>
+            <li><strong>Hukum Ketiga:</strong> Saat suhu mendekati nol absolut, entropi sistem mendekati nol.</li>
+        </ul>
+    </li>
+    <li><strong>Aplikasi Termodinamika dalam Kehidupan Sehari-hari</strong>
+        <ul>
+            <li>Mesin dan kendaraan.</li>
+            <li>Refrigerator dan AC.</li>
+            <li>Pembangkit listrik.</li>
+            <li>Metabolisme dalam tubuh.</li>
+        </ul>
+    </li>
+</ol>
+<div style="margin-top: 50px;">
+  <h3>🧠 Penilaian Akhir: Tes Pemahaman Termodinamika</h3>
+  <form id="finalQuizForm">
+    <p><strong>Soal 1:</strong> Apa hukum pertama termodinamika?</p>
+    <input type="radio" name="q1" value="a"> A. Energi tidak bisa hilang, tapi bisa bertambah<br>
+    <input type="radio" name="q1" value="b"> B. Energi dapat diciptakan<br>
+    <input type="radio" name="q1" value="c"> C. Energi tidak dapat diciptakan maupun dimusnahkan, hanya berubah bentuk<br><br>
+
+    <p><strong>Soal 2:</strong> Apa arti dari entropi dalam termodinamika?</p>
+    <input type="radio" name="q2" value="a"> A. Jumlah energi dalam sistem<br>
+    <input type="radio" name="q2" value="b"> B. Ukuran ketidakteraturan sistem<br>
+    <input type="radio" name="q2" value="c"> C. Jumlah panas dan kerja<br><br>
+
+    <p><strong>Soal 3:</strong> Apa rumus efisiensi termal mesin?</p>
+    <input type="radio" name="q3" value="a"> A. η = Qout / Qin<br>
+    <input type="radio" name="q3" value="b"> B. η = 1 - (Qout / Qin)<br>
+    <input type="radio" name="q3" value="c"> C. η = W / T<br><br>
+
+    <button type="button" onclick="gradeFinalQuiz()">Lihat Skor Akhir</button>
+    <p id="finalScore" style="margin-top: 10px;"></p>
+  </form>
+</div>
+
+
+
+    <div style="margin-top: 40px;">
+      <h3>🎓 Quiz Mini: Coba Tes Pemahamanmu!</h3>
+      <p><strong>Soal:</strong> Apa hukum pertama termodinamika?</p>
+      <form id="quizForm">
+        <input type="radio" name="quiz" value="a"> A. Energi tidak bisa hilang, tapi bisa bertambah<br>
+        <input type="radio" name="quiz" value="b"> B. Energi dapat diciptakan<br>
+        <input type="radio" name="quiz" value="c"> C. Energi tidak dapat diciptakan maupun dimusnahkan, hanya berubah bentuk<br><br>
+        <button type="button" onclick="checkQuiz()">Jawab</button>
+        <p id="quizResult" style="margin-top:10px;"></p>
+      </form>
+    </div>
+    
+  <h2 id="bab1">Bab 1: Pengenalan Termodinamika</h2>
+  <ol>
+    <li><strong>Pendahuluan ke Termodinamika</strong>
+      <p>Termodinamika adalah ilmu yang membahas hubungan antara energi dan perubahan sifat zat dalam sebuah sistem.</p>
+      <p><strong>Konsep-konsep dasar:</strong></p>
+      <p>
+        <strong>1. Memahami Kosakata dalam Termodinamika</strong><br>
+        Termodinamika memiliki istilah-istilah khusus yang harus dipahami dengan baik agar dapat digunakan secara tepat dalam analisis dan perhitungan. Beberapa istilah dasar yang diperkenalkan meliputi:
+      </p>
+      <ul>
+        <li><strong>Sistem:</strong> Bagian dari alam semesta yang sedang diamati atau dianalisis.</li>
+        <li><strong>Keadaan (State):</strong> Kondisi sistem yang ditentukan oleh parameter seperti tekanan, suhu, dan volume.</li>
+        <li><strong>Proses:</strong> Perubahan dari satu keadaan ke keadaan lain dalam sistem.</li>
+        <li><strong>Kesetimbangan (Equilibrium):</strong> Kondisi di mana tidak ada perubahan dalam properti sistem seiring waktu.</li>
+        <li><strong>Siklus (Cycle):</strong> Sekumpulan proses yang akhirnya mengembalikan sistem ke keadaan awalnya.</li>
+      </ul>
+      <p>
+        Ini seperti memahami istilah dalam mata kuliah baru. Jika kita belajar tentang mesin mobil, kita harus tahu istilah seperti piston, silinder, dan bahan bakar. Dalam termodinamika, ada istilah spesifik yang harus kita kuasai sebelum bisa memahami bagaimana energi bekerja dalam sistem.
+      </p>
+
+      <p>
+        <strong>2. Meninjau Sistem Satuan (SI dan Inggris)</strong><br>
+        Dalam perhitungan termodinamika, dua sistem satuan utama yang digunakan adalah:
+      </p>
+      <ul>
+        <li><strong>Satuan SI (Système International d'Unités):</strong> Digunakan secara luas di seluruh dunia, seperti meter (m) untuk panjang, kilogram (kg) untuk massa, dan Joule (J) untuk energi.</li>
+        <li><strong>Satuan Inggris (British Engineering Units):</strong> Digunakan di beberapa negara seperti Amerika Serikat, dengan satuan seperti kaki (ft), pound-massa (lbm), dan BTU (British Thermal Unit) untuk energi.</li>
+      </ul>
+      <p>
+        Ini seperti membandingkan sistem metrik dengan sistem yang digunakan di AS. Bayangkan kalau kita membaca resep masakan: ada yang pakai gram dan liter, tapi ada juga yang pakai ons dan gelas. Kalau kita tidak terbiasa, bisa salah mengukur. Begitu juga dalam termodinamika, kita harus tahu konversinya supaya tidak salah dalam perhitungan.
+      </p>
+
+      <p>
+        <strong>3. Properti Sistem: Massa Jenis, Berat Jenis, dan Berat Spesifik</strong><br>
+        Untuk memahami karakteristik suatu sistem, kita perlu memahami beberapa properti fisik seperti:
+      </p>
+      <ul>
+        <li><strong>Massa Jenis (ρ):</strong> Massa per satuan volume (<code>ρ = m/V</code>), biasanya dalam kg/m³.</li>
+        <li><strong>Berat Jenis:</strong> Perbandingan massa jenis suatu zat terhadap massa jenis air.</li>
+        <li><strong>Berat Spesifik (γ):</strong> Berat per satuan volume (<code>γ = ρg</code>), di mana <code>g</code> adalah percepatan gravitasi.</li>
+      </ul>
+      <p>
+        Bayangkan kita punya dua benda dengan ukuran yang sama: bola besi dan bola plastik. Bola besi terasa lebih berat karena memiliki massa jenis lebih tinggi. Berat jenis seperti membandingkan massa jenis benda dengan air. Kalau lebih ringan dari air, benda akan mengapung, kalau lebih berat, benda akan tenggelam. Berat spesifik hanya menghitung berat benda berdasarkan volume tertentu.
+      </p>
+
+      <p>
+        <strong>4. Konsep Suhu dan Tekanan</strong><br>
+        Dalam termodinamika, suhu dan tekanan adalah properti utama yang menentukan keadaan suatu sistem:
+      </p>
+      <ul>
+        <li><strong>Suhu:</strong> Ukuran energi termal suatu benda, dengan skala umum seperti Celcius (°C), Kelvin (K), Fahrenheit (°F), dan Rankine (°R).</li>
+        <li><strong>Tekanan:</strong> Gaya per satuan luas (<code>P = F/A</code>), dengan satuan Pascal (Pa) dalam SI atau psi (pound per square inch) dalam sistem Inggris.</li>
+        <li><strong>Tekanan Absolut vs. Tekanan Gauge:</strong> Tekanan absolut diukur dari nol tekanan total, sedangkan tekanan gauge diukur relatif terhadap tekanan atmosfer.</li>
+      </ul>
+      <p>
+        Suhu itu seperti seberapa panas atau dinginnya sesuatu. Saat kita menyentuh es, kita merasa dingin karena suhu es lebih rendah dari tangan kita. Tekanan itu seperti saat kita menggembungkan balon—semakin banyak udara yang kita tiup, semakin tinggi tekanannya di dalam balon. Tekanan gauge seperti yang kita lihat di pompa ban, yang hanya mengukur tekanan di atas tekanan atmosfer, sementara tekanan absolut menghitung dari nol tekanan total.
+      </p>
+
+      <p>
+        <strong>5. Teknik Pemecahan Masalah yang Sistematis</strong><br>
+        Dalam termodinamika, pemecahan masalah yang terstruktur sangat penting. Langkah-langkah dasar dalam menyelesaikan soal termodinamika meliputi:
+      </p>
+      <ol>
+        <li><strong>Memahami pertanyaan:</strong> Identifikasi informasi yang diberikan dan apa yang diminta.</li>
+        <li><strong>Membuat diagram atau sketsa:</strong> Menyusun gambar sistem untuk memahami situasi lebih baik.</li>
+        <li><strong>Menentukan sistem dan batasannya:</strong> Tentukan apakah sistem itu terbuka atau tertutup.</li>
+        <li><strong>Menentukan properti dan persamaan yang digunakan:</strong> Gunakan konsep yang relevan seperti hukum pertama termodinamika.</li>
+        <li><strong>Melakukan perhitungan:</strong> Gunakan satuan yang benar dan konversi jika diperlukan.</li>
+        <li><strong>Memeriksa jawaban:</strong> Pastikan hasil masuk akal berdasarkan kondisi awal.</li>
+      </ol>
+      <p>
+        Bayangkan kita diberi tugas menghitung berapa lama waktu yang dibutuhkan untuk mendidihkan air dalam panci. Kalau kita asal hitung tanpa tahu rumus atau data yang diperlukan, kita pasti bingung. Dengan pendekatan sistematis, kita mulai dari mencari data (volume air, daya pemanas), membuat persamaan yang sesuai (hukum pertama termodinamika), melakukan perhitungan, lalu memeriksa hasil apakah masuk akal atau tidak.
+      </p>
+
+</p>
+      <ul>
+        <li><strong>Sistem:</strong> Bagian yang dipelajari.
+          <ul>
+            <li><strong>Sistem tertutup:</strong> Hanya energi yang dapat berpindah.</li>
+            <li><strong>Sistem terbuka:</strong> Massa dan energi dapat berpindah.</li>
+            <li><strong>Sistem terisolasi:</strong> Tidak ada perpindahan energi maupun massa.</li>
+          </ul>
+        </li>
+        <li><strong>Lingkungan:</strong> Segala sesuatu di luar sistem.</li>
+        <li><strong>Sifat Termodinamika:</strong> Tekanan (P), Suhu (T), Volume (V), Energi Dalam (U).</li>
+      </ul>
+      <p><strong>Contoh:</strong></p>
+      <ul>
+        <li>Gas di dalam piston (tertutup).</li>
+        <li>Turbin uap (terbuka).</li>
+      </ul>
+    </li>
+
+    <li><strong>Hukum Pertama Termodinamika (Hukum Kekekalan Energi)</strong>
+      <p>Hukum ini menyatakan bahwa energi dalam suatu sistem dapat berubah bentuk, namun jumlah totalnya tetap.</p>
+      <p><strong>Persamaan umum:</strong> ΔU = Q − W</p>
+      <ul>
+        <li><strong>Q:</strong> Energi panas yang diterima sistem (+ jika masuk).</li>
+        <li><strong>W:</strong> Kerja yang dilakukan sistem (+ jika keluar).</li>
+      </ul>
+      <p><strong>Contoh:</strong> Pemanasan air dalam ketel listrik: energi listrik berubah menjadi energi panas.</p>
+    </li>
+
+    <li><strong>Sifat Zat Murni</strong>
+      <p>Zat murni adalah zat dengan komposisi homogen di seluruh bagian.</p>
+      <ul>
+        <li><strong>Diagram fasa:</strong> P-v (Tekanan-Volume), T-s (Suhu-Entropi).</li>
+        <li><strong>Sifat kritis:</strong> Titik di mana tidak ada lagi perbedaan antara fase cair dan uap.</li>
+        <li><strong>Kualitas uap (x):</strong> Persentase massa uap dalam campuran cair-uap.</li>
+      </ul>
+    </li>
+
+    <li><strong>Hukum Kedua Termodinamika dan Entropi</strong>
+      <p>Menjelaskan keterbatasan dalam konversi energi dan arah alami dari proses. Dalam proses ireversibel, entropi sistem dan lingkungan selalu meningkat.</p>
+    </li>
+
+    <li><strong>Analisis Siklus Daya dan Refrigerasi</strong>
+      <ul>
+        <li><strong>Siklus Rankine:</strong> untuk pembangkit listrik uap.</li>
+        <li><strong>Siklus Kompresi Uap:</strong> untuk kulkas dan AC.</li>
+        <li><strong>Efisiensi termal:</strong> η = (output kerja) / (input panas).</li>
+        <li><strong>COP:</strong> digunakan untuk sistem pendingin dan pompa panas.</li>
+      </ul>
+    </li>
+  </ol>
+<div style="margin-top: 50px;">
+  
+  <h2 id="bab2">Bab 2: Energi, Perpindahan, dan Efisiensi</h2>
+  <h3>pengertian</h3>
+  <p>
+    (Berdasarkan buku "Thermodynamics: An Engineering Approach" karya Yunus A. Çengel & Michael A. Boles) Bab ini menjelaskan konsep dasar energi, bagaimana energi berpindah, serta bagaimana kita bisa menganalisisnya dalam suatu sistem. Pemahaman ini penting karena energi adalah inti dari setiap fenomena termodinamika, dari mesin pembakaran hingga proses metabolisme dalam tubuh manusia.
+  </p>
+  <p>
+    <strong> Apa Itu Energi?</strong><br>
+    Energi didefinisikan sebagai kapasitas untuk melakukan kerja atau menyebabkan perubahan dalam suatu sistem. Dalam kehidupan sehari-hari, energi ada di mana-mana—dari bensin yang memberi daya pada mobil, makanan yang memberikan energi bagi tubuh, hingga listrik yang menyalakan lampu.
+  </p>
+  <p>Cara Energi Berpindah</p>
+  <p>Energi tidak bisa muncul begitu saja atau menghilang, tetapi hanya bisa berpindah dalam tiga cara utama:</p>
+  <ol>
+    <li><strong>Panas (Q)</strong>
+      <ul>
+        <li>Energi berpindah karena perbedaan suhu.</li>
+        <li>Panas selalu mengalir dari suhu tinggi ke suhu rendah (hukum kedua termodinamika).</li>
+        <li>Satuan panas dalam SI adalah joule (J) atau kilojoule (kJ).</li>
+      </ul>
+      <p><strong>🔹 Contoh:</strong></p>
+      <ul>
+        <li>Air mendidih saat kita menaruhnya di atas kompor.</li>
+        <li>Es batu mencair saat diletakkan di tangan karena panas dari tangan berpindah ke es.</li>
+      </ul>
+    </li>
+    <li><strong>Kerja (W)</strong>
+      <ul>
+        <li>Energi berpindah karena gaya yang diberikan pada sistem.</li>
+        <li>Rumus umum kerja: <code>W = F ⋅ d</code>, di mana <code>F</code> adalah gaya dan <code>d</code> adalah jarak perpindahan.</li>
+      </ul>
+      <p><strong>🔹 Contoh:</strong></p>
+      <ul>
+        <li>Mengangkat barang dari lantai ke meja memerlukan kerja karena ada gaya yang dilakukan terhadap benda.</li>
+        <li>Mesin piston dalam mobil menggunakan kerja untuk menggerakkan roda.</li>
+      </ul>
+    </li>
+    <li><strong>Transfer Energi melalui Massa</strong>
+      <ul>
+        <li>Energi bisa berpindah ketika ada aliran massa ke dalam atau keluar dari sistem.</li>
+        <li>Biasanya terjadi pada sistem terbuka, seperti turbin, kompresor, atau pompa.</li>
+      </ul>
+      <p><strong>🔹 Contoh:</strong></p>
+      <ul>
+        <li>Uap yang masuk ke turbin membawa energi yang dapat dikonversi menjadi kerja.</li>
+        <li>Air yang mengalir di dalam pipa juga membawa energi kinetik dan potensial.</li>
+      </ul>
+    </li>
+  </ol>
+    
+    Bayangkan secangkir teh panas. Panas dari teh berpindah ke udara di sekitarnya, dan ini disebut transfer panas. Kalau kita mengaduk teh dengan sendok, kita melakukan kerja pada cairan. Jika kita menuangkan teh dari cangkir ke dalam botol lain, energi teh ikut berpindah bersama dengan massa cairan yang bergerak.
+    </p>
+  <h3>1. Bentuk-Bentuk Energi</h3>
+  <ul>
+    <li><strong>Energi Internal (U):</strong> Energi yang terkait dengan struktur molekul suatu zat.</li>
+    <li><strong>Energi Kinetik (KE):</strong> Energi karena gerakan objek. Rumus: KE = (1/2)mv²</li>
+    <li><strong>Energi Potensial (PE):</strong> Energi karena posisi objek. Rumus: PE = mgh</li>
+    <li><strong>Energi Mekanik:</strong> Gabungan KE dan PE. Contoh: air jatuh di bendungan.</li>
+  </ul>
+
+  <h3>2. Transfer Energi</h3>
+  <ul>
+    <li><strong>Transfer Panas (Q):</strong> Energi karena perbedaan suhu.</li>
+    <li><strong>Transfer Kerja (W):</strong> Energi karena gaya. Contoh: kerja piston, kerja listrik.</li>
+    <li><strong>Rumus kerja mekanik:</strong> W = ∫ P dV</li>
+  </ul>
+
+  <h3>3. Hukum Pertama Termodinamika</h3>
+  <p>ΔE = Q − W</p>
+  <ul>
+    <li>Q: panas masuk</li>
+    <li>W: kerja keluar</li>
+    <li>ΔE: perubahan energi sistem (internal, kinetik, dan potensial)</li>
+    <img src="file:///C:/Users/ASUS/Desktop/termodinamika/images/hukum%20termodinamika.jpeg"width="500" alt="Hukum Pertama Termodinamika">
+  </ul>
+
+  <h3>4. Efisiensi Energi</h3>
+  <ul>
+    <li>η = (Energi keluar yang berguna) / (Energi masuk)</li>
+    <li>Contoh: Efisiensi mesin bensin ≈ 30%</li>
+    <p>🔹 Contoh:</p>
+    <ul>
+      <li>Mesin mobil rata-rata hanya memiliki efisiensi sekitar 25-30%, artinya dari 100% energi dalam bensin, hanya 25-30% yang benar-benar digunakan untuk menggerakkan mobil, sisanya hilang sebagai panas.</li>
+      <li>Lampu pijar hanya memiliki efisiensi sekitar 5-10%, karena sebagian besar energi listrik berubah menjadi panas, bukan cahaya.</li>
+    </ul>
+      </p>
+  </ul>
+
+  <h3>5. Dampak Lingkungan dan Solusi</h3>
+  <ul>
+    <li>Pembakaran energi fosil → CO₂ → pemanasan global</li>
+    <li>Solusi: energi terbarukan, efisiensi energi, sistem tertutup</li>
+  </ul>
+  <h2 id="bab3">Bab 3: Zat Murni & Siklus Termodinamika</h2>
+  <p>Zat murni adalah zat yang memiliki komposisi homogen dan konsisten. Ia dapat mengalami perubahan fasa: padat, cair, dan gas. Contoh umum: air, refrigeran, udara murni.</p>
+
+  <h3>1. Perubahan Fasa</h3>
+  <ul>
+    <li><strong>Cair Terkompresi:</strong> Belum mencapai titik didih.</li>
+    <li><strong>Cair Jenuh:</strong> Siap berubah jadi uap.</li>
+    <li><strong>Campuran Cair-Uap:</strong> Dalam proses penguapan.</li>
+    <li><strong>Uap Jenuh:</strong> Semua cairan telah menguap.</li>
+    <li><strong>Uap Superpanas:</strong> Dipanaskan lebih lanjut di atas suhu jenuh.</li>
+  </ul>
+
+  <h3>2. Diagram Fasa</h3>
+  <ul>
+    <li>T-v Diagram (Temperatur vs Volume)</li>
+    <li>P-v Diagram (Tekanan vs Volume)</li>
+    <li>P-T Diagram (Tekanan vs Suhu)</li>
+  </ul>
+
+  <h3>3. Fraksi Kering (x) dan Properti Campuran</h3>
+  <ul>
+    <li><strong>x = m<sub>uap</sub> / m<sub>total</sub></strong></li>
+    <li><strong>h = h<sub>f</sub> + x(h<sub>fg</sub>)</strong></li>
+    <li><strong>s = s<sub>f</sub> + x(s<sub>fg</sub>)</strong></li>
+    <li><strong>v = v<sub>f</sub> + x(v<sub>fg</sub>)</strong></li>
+  </ul>
+  <p>
+    <strong>1. Zat Murni dan Fase-Fasenya</strong><br>
+    Zat murni adalah zat yang memiliki komposisi kimia seragam dan tidak berubah, bahkan ketika terjadi perubahan fasa. Zat ini bisa berada dalam tiga fase:
+  </p>
+  <ul>
+    <li><strong>Fase Padat:</strong> Molekul-molekul tersusun rapi dalam struktur kristal dan hanya bergetar di sekitar posisi tetap.</li>
+    <li><strong>Fase Cair:</strong> Molekul-molekul lebih bebas bergerak dibandingkan fase padat, tetapi tetap saling berinteraksi.</li>
+    <li><strong>Fase Gas:</strong> Molekul-molekul bergerak sangat bebas, jarak antar molekul jauh, dan interaksi antar molekul sangat lemah.</li>
+  </ul>
+  <p><em>Catatan Penting:</em> Fase zat dapat berubah tergantung pada suhu dan tekanan yang dialaminya.</p>
+
+  <img src="file:///C:/Users/ASUS/Desktop/termodinamika/images/skema%20siklus%20rankine.jpg" width="500"  alt="Siklus Rankine"> 
+  <img src="file:///C:/Users/ASUS/Desktop/termodinamika/images/siklus-refrigerasi.jpg" width="500"  alt="Siklus Refrigerasi">
+
+  <h3>4. Siklus Rankine</h3>
+  <ul>
+    <li>Pembakaran bahan bakar → uap dipanaskan → turbin → kondenser → pompa → boiler</li>
+    <li>Digunakan pada pembangkit listrik uap</li>
+  </ul>
+
+  <h3>5. Siklus Kompresi Uap (Refrigerasi)</h3>
+  <ul>
+    <li>Evaporator → kompresor → kondenser → katup ekspansi</li>
+    <li>Contoh: AC, kulkas</li>
+    <li><strong>COP:</strong> efisiensi sistem pendingin</li>
+  </ul>
+
+  <iframe src="https://www.youtube.com/embed/YzaXgU6VmkQ?si=L-wuG-XEESmjyvNl" title="Video Kuliah Termodinamika Biosistem"></iframe>
+  <h2 id="bab4">Bab 4: Sistem Tertutup dalam Termodinamika</h2>
+
+  <h3>1. Definisi Sistem Tertutup</h3>
+  <p>Sistem di mana massa tidak dapat masuk atau keluar, namun energi (panas atau kerja) masih dapat berpindah.</p>
+  <ul>
+    <li><strong>Contoh:</strong> Tabung gas tertutup, piston dengan fluida tetap</li>
+  </ul>
+
+  <h3>2. Hukum Pertama untuk Sistem Tertutup</h3>
+  <p>Persamaan umum:</p>
+  <pre><code>ΔU = Q − W</code></pre>
+  <ul>
+    <li>ΔU = perubahan energi dalam</li>
+    <li>Q = panas yang masuk</li>
+    <li>W = kerja yang dilakukan sistem</li>
+  </ul>
+
+  <h3>3. Jenis Kerja pada Sistem Tertutup</h3>
+  <ul>
+    <li><strong>Kerja Tekanan-Volume (W = ∫P dV)</strong></li>
+    <li><strong>Kerja Listrik, Poros, dll.</strong></li>
+  </ul>
+
+  <h3>4. Proses-Proses Khusus</h3>
+  <table border="1" cellpadding="5">
+    <thead>
+      <tr>
+        <th>Proses</th><th>Ciri</th><th>Rumus Kerja</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Isotermal</td><td>Suhu tetap</td><td>W = nRT ln(V2/V1)</td></tr>
+      <tr><td>Isobarik</td><td>Tekanan tetap</td><td>W = P(V2 − V1)</td></tr>
+      <tr><td>Isokhorik</td><td>Volume tetap</td><td>W = 0</td></tr>
+      <tr><td>Adiabatik</td><td>Tanpa perpindahan panas</td><td>W = (P2V2 − P1V1)/(γ−1)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5. Contoh Soal</h3>
+  <p>
+    Sebuah gas ideal 1 mol dipanaskan secara isotermal dari 300 K, volumenya mengembang dua kali lipat. Hitung kerja yang dilakukan!
+  </p>
+  <p><strong>Penyelesaian:</strong></p>
+  <p>W = nRT ln(V2/V1) = 1 × 8.314 × 300 × ln(2) ≈ 1728 J</p>
+
+  <h3>6. Analogi Kehidupan Sehari-hari</h3>
+  <p><em>Tumbler berisi kopi panas</em> adalah contoh sistem tertutup adiabatik: tidak ada panas yang keluar, tidak ada massa yang masuk/keluar. Energi hanya berubah bentuk.</p>
+  <h2 id="bab5">Bab 5: Analisis Massa dan Energi</h2>
+  <h3>1. Prinsip Konservasi Massa</h3>
+  <ul>
+      <li>Massa, seperti energi, merupakan besaran yang dikonservasi dan tidak dapat diciptakan atau dimusnahkan dalam suatu proses.</li>
+      <li>Dalam sistem tertutup, massa tetap konstan.</li>
+      <li>Dalam volume kontrol, massa dapat melintasi batas, sehingga perlu ditelusuri jumlah massa yang masuk dan keluar.</li>
+  </ul>
+
+  <h3>2. Laju Aliran Massa dan Volume</h3>
+  <p>Kecepatan rata-rata aliran massa dan volume digunakan untuk menentukan besarnya massa yang mengalir dalam suatu sistem.</p>
+
+  <h3>3. Persamaan Kesetimbangan Massa</h3>
+  <ul>
+      <li>Transfer massa netto ke/dari volume kontrol dalam waktu tertentu sama dengan perubahan total massa di dalam volume kontrol pada waktu yang sama.</li>
+      <li>Prinsip ini berlaku untuk berbagai jenis proses.</li>
+  </ul>
+
+  <h3>4. Konservasi Massa dalam Kondisi Steady State</h3>
+  <ul>
+      <li>Dalam aliran steady, jumlah massa dalam volume kontrol tetap konstan seiring waktu.</li>
+      <li>Massa yang masuk harus sama dengan massa yang keluar.</li>
+      <li>Banyak peralatan teknik seperti nozel, diffuser, turbin, kompresor, dan pompa memiliki satu inlet dan satu outlet.</li>
+  </ul>
+
+  <h4>Contoh Soal:</h4>
+  <p>
+  Suatu selang taman dengan diameter dalam 2 cm dan diameter nozzle 0.8 cm digunakan untuk mengisi ember 10 gallon dalam 50 detik. Tentukan:
+  </p>
+  <ul>
+      <li>(a) Volume dan laju aliran massa air melalui selang.</li>
+      <li>(b) Kecepatan rata-rata aliran air di exit nozzle.</li>
+  </ul>
+  <p><strong>Jawaban:</strong></p>
+  <p>
+  Gunakan rumus laju aliran massa dan volume:
+  </p>
+  <ul>
+      <li><strong>Laju aliran volume:</strong> \( \dot{V} = \frac{\text{Volume}}{\text{Waktu}} \)</li>
+      <li><strong>Laju aliran massa:</strong> \( \dot{m} = \rho \cdot \dot{V} \)</li>
+      <li><strong>Kecepatan rata-rata:</strong> \( v = \frac{\dot{V}}{A} \), dengan \( A = \pi r^2 \).</li>
+  </ul>
+
+  <h3>5. Kasus Khusus: Aliran Incompressible</h3>
+  <ul>
+      <li>Jika fluida dianggap incompressible (misalnya cairan), persamaan konservasi massa dapat disederhanakan.</li>
+      <li>Dalam aliran steady incompressible, laju aliran volume dan massa tetap konstan karena cairan tidak mengalami perubahan volume yang signifikan.</li>
+  </ul>
+
+  <h3>6. Kerja Aliran dan Energi Fluida yang Mengalir</h3>
+  <h4>Pengertian Kerja Aliran</h4>
+  <p>Kerja aliran atau energi aliran adalah energi yang diperlukan untuk mendorong massa fluida agar dapat masuk atau keluar dari volume kontrol. Kerja ini dinyatakan dalam bentuk entalpi:</p>
+  <p>\( h = u + Pv \)</p>
+  <ul>
+      <li>\( h \): entalpi</li>
+      <li>\( u \): energi dalam spesifik</li>
+      <li>\( P \): tekanan</li>
+      <li>\( v \): volume spesifik</li>
+  </ul>
+
+  <h4>Komponen Energi Fluida</h4>
+  <ul>
+      <li>Energi total fluida terdiri dari energi dalam, energi kinetik, energi potensial, dan energi aliran.</li>
+      <li>Jika energi kinetik dan potensial dapat diabaikan, analisis menjadi lebih sederhana.</li>
+  </ul>
+
+  <h4>Transportasi Energi oleh Massa</h4>
+  <p>Ketika massa fluida mengalami perubahan pada inlet atau exit dalam suatu sistem, terdapat perpindahan energi yang signifikan yang perlu dianalisis.</p>
+
+  <h3>7. Aliran Steady-Flow</h3>
+  <p>Banyak peralatan teknik beroperasi dalam kondisi steady-flow, seperti turbin, kompresor, heat exchanger, dan pompa. Dalam kondisi ini, fluida mengalir dengan parameter yang konstan sepanjang waktu.</p>
+
+  <h4>Jenis Peralatan Teknik dalam Aliran Steady-Flow</h4>
+  <ul>
+      <li><strong>Nozel dan Diffuser:</strong> Meningkatkan kecepatan atau tekanan fluida.</li>
+      <li><strong>Turbin:</strong> Mengubah energi fluida menjadi kerja mekanik.</li>
+      <li><strong>Kompresor:</strong> Meningkatkan tekanan fluida dengan menerima kerja eksternal.</li>
+      <li><strong>Katup Throttling:</strong> Menurunkan tekanan fluida tanpa kerja atau perpindahan panas signifikan.</li>
+      <li><strong>Heat Exchanger:</strong> Memungkinkan dua fluida bertukar panas tanpa bercampur.</li>
+  </ul>
+
+  <p>
+      
+<div style="text-align: center; margin: 50px 0;">
+  <h3>🖼️ Ilustrasi Konsep Termodinamika</h3>
+  <img src="file:///C:/Users/ASUS/Desktop/termodinamika/images/20190515_091745termodinamika.jpg" alt="sistem Termodinamika" style="max-width: 80%; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+  <p style="font-size: 14px; color: #666;">Gambar: Diagram umum siklus termodinamika dalam mesin panas.</p>
+</div>
+
+<h2 id="bab6">Bab 6: Hukum Kedua Termodinamika</h2>
+      <p>
+          <strong>Pendahuluan Hukum Kedua</strong><br>
+          • Hukum kedua menjelaskan arah alami suatu proses termodinamika.<br>
+          • Tidak semua proses yang memenuhi hukum pertama dapat terjadi secara alami.<br>
+          • Hukum kedua berhubungan dengan kualitas energi dan degradasinya selama proses.<br>
+      </p>
+      <p>
+          <strong>Reservoir Energi Termal</strong><br>
+          • Reservoir energi termal adalah sumber atau penyerap panas dengan kapasitas besar, seperti lautan dan atmosfer.<br>
+          • Energi panas dapat ditransfer tanpa perubahan suhu yang signifikan.<br>
+      </p>
+      <p>
+          <strong>Heat Engines (Enjin Panas)</strong><br>
+          • Heat engine mengubah panas menjadi kerja dengan menerima panas dari sumber suhu tinggi dan membuang sisanya ke suhu lebih rendah.<br>
+          • Tidak ada heat engine yang memiliki efisiensi 100% karena sebagian energi selalu terbuang sebagai panas.<br>
+          • Efisiensi termal didefinisikan sebagai:<br>
+          <code>η = W<sub>out</sub> / Q<sub>H</sub> = 1 - (Q<sub>L</sub> / Q<sub>H</sub>)</code><br>
+          Dengan:<br>
+          - <code>Q<sub>H</sub></code>: Panas yang diterima dari sumber panas<br>
+          - <code>Q<sub>L</sub></code>: Panas yang dibuang ke lingkungan<br>
+          - <code>W<sub>out</sub></code>: Kerja yang dihasilkan<br>
+      </p>
+      <p>
+          <strong>Refrigerators dan Heat Pumps</strong><br>
+          • Refrigerators memindahkan panas dari suhu rendah ke suhu tinggi dengan menggunakan energi eksternal.<br>
+          • Heat pump memiliki prinsip yang sama, tetapi bertujuan untuk memberikan panas ke lingkungan bersuhu lebih tinggi.<br>
+          • Coefficient of Performance (COP) untuk refrigerator:<br>
+          <code>COP<sub>ref</sub> = Q<sub>L</sub> / W<sub>in</sub></code><br>
+          • Coefficient of Performance (COP) untuk heat pump:<br>
+          <code>COP<sub>hp</sub> = Q<sub>H</sub> / W<sub>in</sub></code><br>
+          • Hubungan antara COP refrigerator dan heat pump:<br>
+          <code>COP<sub>hp</sub> = COP<sub>ref</sub> + 1</code><br>
+      </p>
+      <p>
+          <strong>Hukum Kedua Termodinamika: Pernyataan Clausius</strong><br>
+          • "Tidak mungkin terjadi perpindahan panas dari benda dingin ke benda panas tanpa bantuan energi eksternal."<br>
+          • Ini menjelaskan mengapa kulkas dan AC memerlukan daya listrik untuk bekerja.<br>
+      </p>
+      <p>
+          <strong>Ekivalensi Dua Pernyataan</strong><br>
+          • Pernyataan Kelvin–Planck dan Clausius adalah sama dalam dampaknya, dan pernyataan manapun dapat digunakan sebagai ungkapan untuk hukum kedua termodinamika.<br>
+      </p>
+      <p>
+          <strong>Mesin Gerak-Perpetual</strong><br>
+          • PMM1 melanggar hukum pertama karena menciptakan energi dari nol.<br>
+          • PMM2 melanggar hukum kedua karena bekerja tanpa membuang panas.<br>
+      </p>
+      <p>
+          <strong>Proses Reversible dan Irreversible</strong><br>
+          • Proses reversible: Dapat dibalik tanpa meninggalkan efek pada lingkungan.<br>
+          • Proses irreversible: Mengalami gesekan, perpindahan panas dengan beda suhu besar, dan reaksi kimia.<br>
+          • Faktor-faktor penyebab irreversibilitas:<br>
+          a. Gesekan<br>
+          b. Perpindahan panas dengan beda suhu yang besar<br>
+          c. Ekspansi yang tidak terkendali<br>
+          d. Reaksi kimia<br>
+      </p>
+      <p>
+          <strong>Siklus Carnot</strong><br>
+          • Siklus Carnot adalah siklus paling efisien yang terdiri dari:<br>
+          - Dua proses isentropik (adiabatik reversible)<br>
+          - Dua proses isotermal<br>
+          • Efisiensi termal Carnot:<br>
+          <code>η<sub>Carnot</sub> = 1 - (T<sub>L</sub> / T<sub>H</sub>)</code><br>
+          Dengan:<br>
+          - <code>T<sub>H</sub></code>: Suhu reservoir panas (Kelvin)<br>
+          - <code>T<sub>L</sub></code>: Suhu reservoir dingin (Kelvin)<br>
+          • COP Carnot untuk refrigerator:<br>
+          <code>COP<sub>ref,Carnot</sub> = T<sub>L</sub> / (T<sub>H</sub> - T<sub>L</sub>)</code><br>
+          • COP Carnot untuk heat pump:<br>
+          <code>COP<sub>hp,Carnot</sub> = T<sub>H</sub> / (T<sub>H</sub> - T<sub>L</sub>)</code><br>
+      </p>
+      <p>
+          <strong>Skala Temperatur Termodinamika</strong><br>
+          • Suhu absolut (Kelvin) ditentukan dari siklus Carnot.<br>
+          • Menggunakan skala Kelvin memberikan perhitungan yang lebih akurat.<br>
+  <h4>Contoh Soal:</h4>
+  <p>
+  Diketahui turbin uap dengan tekanan masuk 1.6 MPa dan suhu 350°C, serta tekanan keluar 30°C (uap jenuh). Laju aliran massa 22 kg/s dan daya turbin 12,350 kW. Tentukan tingkat kehilangan panas (Q̇) melalui casing turbin.
+  </p>
+  <p><strong>Penyelesaian:</strong></p>
+  <p>Gunakan persamaan kesetimbangan energi:</p>
+  <p>\( Q̇ - Ẇ = \dot{m} (h_2 - h_1) \)</p>
+  <ul>
+      <li>\( Q̇ \): Laju kehilangan panas</li>
+      <li>\( Ẇ \): Daya turbin</li>
+      <li>\( h_1, h_2 \): Enthalpi masuk dan keluar (dari tabel properti uap)</li>
+  </ul>
+  <p>Substitusi nilai untuk mendapatkan hasil.</p>
+  </p>
+<img src="file:///C:/Users/ASUS/Desktop/termodinamika/images/134-1.png" width="500" alt="Mesin Kalor">
+
+<h2 id="soal">Soal Latihan</h2>
+<ol>
+  <li>Sebuah sistem menerima 800 kJ energi dan melakukan 250 kJ kerja. Jika hanya 70% energi dapat digunakan secara efektif, berapa perubahan energi dalam sistem?</li>
+  <li>Sistem berisi 1.5 kg refrigeran-134a pada 400 kPa dan volume spesifik 0.025 m³/kg. Tentukan kualitas uap campuran tersebut!.</li>
+  <li>Dalam Siklus Rankine, jika entalpi masuk turbin 3200 kJ/kg dan keluar 2200 kJ/kg, berapa efisiensi termalnya?</li>
+</ol>
+<div style="margin-top: 50px;">
+ 
+    
+
+<div class="footer">
+&copy; 2025 | Disusun oleh Fadil Hadzy & Fahrur Rozi berdasarkan kuliah Prof. Daniel Saputra<br>
+Buku acuan: Thermodynamics (Çengel & Boles)
+</div>
+
+<button onclick="topFunction()" id="topBtn">⬆ Kembali ke Atas</button>
+    <script>
+    // Accordion
+    const acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+      acc[i].onclick = function() {
+        this.classList.toggle("active");
+        const panel = this.nextElementSibling;
+        panel.style.display = (panel.style.display === "block") ? "none" : "block";
+      };
+    }
+
+    // Scroll to top
+    let topBtn = document.getElementById("topBtn");
+    window.onscroll = function() {
+      topBtn.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "block" : "none";
+    };
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+    </script>
+    
+
+    <script>
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('h2[id]');
+      const navLinks = document.querySelectorAll('nav a');
+      let current = "";
+
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        if (scrollY >= sectionTop) {
+          current = section.getAttribute("id");
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.classList.remove("active-nav");
+        if (link.getAttribute("href").includes(current)) {
+          link.classList.add("active-nav");
+        }
+      });
+    });
+    </script>
+    <style>
+    nav a.active-nav {
+      text-decoration: underline;
+      color: #003366;
+      background-color: #fff;
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    </style>
+    
+
+    <script>
+    // Search function
+    document.getElementById("searchInput").addEventListener("keyup", function() {
+      const input = this.value.toLowerCase();
+      const paragraphs = document.querySelectorAll(".container p, .container li");
+      paragraphs.forEach(p => {
+        p.style.backgroundColor = p.textContent.toLowerCase().includes(input) && input.length > 2 ? "#ffffcc" : "";
+      });
+    });
+
+    // Quiz check
+    function checkQuiz() {
+      const selected = document.querySelector('input[name="quiz"]:checked');
+      const result = document.getElementById("quizResult");
+      if (!selected) {
+        result.innerText = "❗ Silakan pilih jawaban terlebih dahulu.";
+        result.style.color = "orange";
+      } else if (selected.value === "c") {
+        result.innerText = "✅ Benar! Hukum pertama menyatakan energi tidak dapat diciptakan atau dimusnahkan.";
+        result.style.color = "green";
+      } else {
+        result.innerText = "❌ Jawaban salah. Coba lagi!";
+        result.style.color = "red";
+      }
+    }
+    </script>
+    
+
+
+
+
+<script>
+function gradeFinalQuiz() {
+  let score = 0;
+  const q1 = document.querySelector('input[name="q1"]:checked');
+  const q2 = document.querySelector('input[name="q2"]:checked');
+  const q3 = document.querySelector('input[name="q3"]:checked');
+  if (q1 && q1.value === "c") score++;
+  if (q2 && q2.value === "b") score++;
+  if (q3 && q3.value === "b") score++;
+  const result = document.getElementById("finalScore");
+  result.innerText = "Skor Akhir Anda: " + score + "/3";
+  result.style.color = score === 3 ? "green" : (score >= 2 ? "orange" : "red");
+}
+</script>
+
+</body>
+</html>
